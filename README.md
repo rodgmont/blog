@@ -1,2 +1,2 @@
 # blog
-A blog for for disruptive minds.
+A blog for disruptive minds.
