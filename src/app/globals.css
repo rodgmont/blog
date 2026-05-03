@@ -1,0 +1,742 @@
+:root {
+  /* Default: dark */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --accent: #ffffff;
+  --accent-foreground: #000000;
+  --muted: #a0a0a0;
+  --radius: 12px;
+
+  /* Fluid layout + typography */
+  --container: 860px;
+  --gutter: clamp(16px, 4vw, 28px);
+  --space-1: clamp(8px, 1.6vw, 12px);
+  --space-2: clamp(12px, 2.2vw, 18px);
+  --space-3: clamp(16px, 3vw, 26px);
+  --space-4: clamp(22px, 4vw, 40px);
+
+  --text-sm: clamp(0.82rem, 0.65rem + 0.35vw, 0.95rem);
+  --text-md: clamp(0.95rem, 0.82rem + 0.45vw, 1.05rem);
+  --text-lg: clamp(1.05rem, 0.90rem + 0.75vw, 1.25rem);
+  --h1: clamp(2.05rem, 1.55rem + 2.2vw, 3.0rem);
+  --h2: clamp(1.35rem, 1.05rem + 1.25vw, 1.7rem);
+
+  /*
+   * Hero del post (cabecera): ratio fijo en pantalla; cualquier foto se escala con object-fit: cover.
+   * Recomendado al exportar: 1600×900 (16:9) o 1920×1080; también válido 1200×630 (OG) — se recorta al ratio.
+   */
+  --article-hero-aspect-ratio: 16 / 9;
+  --article-hero-max-height: 420px;
+}
+
+html {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+
+  :root {
+    --background: #ffffff;
+    --foreground: #111111;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.05);
+    --accent: #000000;
+    --accent-foreground: #ffffff;
+    --muted: #888888;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.no-fade:hover {
+  opacity: 1;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(150, 150, 150, 0.3);
+}
+
+/* Layout Utilities */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+main {
+  flex: 1;
+  padding-top: 0;
+}
+
+/* Home hero: sin text-wrap:balance (evita dejar solo “Fran Rodgmont.” en la 1ª línea). max-width en em escala con el clamp del h1. */
+.hero-section {
+  padding: 20px 0 44px;
+}
+
+h1.hero-headline {
+  text-wrap: wrap;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.hero-headline__muted {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ES: ~“Fran Rodgmont. Construyendo” / “el futuro que trasciende.” */
+.hero-headline--es {
+  max-width: min(100%, 16.25em);
+}
+
+/* EN: salto natural sin apretar demasiado */
+.hero-headline--en {
+  max-width: min(100%, 19em);
+}
+
+.hero-body {
+  max-width: min(100%, 33.5em);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  margin-bottom: 0;
+}
+
+.hero-body__link {
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+/* Header: navegación principal (idioma va en el footer) */
+.site-header {
+  padding: clamp(20px, 5vw, 44px) 0 clamp(16px, 3vw, 28px);
+}
+
+.site-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.site-header__brand {
+  font-weight: 700;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.15rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2.5vw, 16px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.site-header__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin: -4px;
+  border-radius: 6px;
+  opacity: 0.85;
+}
+
+.site-lang-btn:hover {
+  opacity: 1;
+}
+
+.site-footer {
+  margin-top: auto;
+  padding: 32px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer__copy {
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.site-footer__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.site-footer__github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.site-header__follow-text {
+  display: inline;
+}
+
+/* Lista del blog: toda la fila es clicable */
+.article-card {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.article-card__link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 8px;
+  margin: 0 -8px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.article-card__link:hover .article-card__title,
+.article-card__link:focus-visible .article-card__title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-card__link:focus-visible {
+  box-shadow: 0 0 0 2px var(--foreground);
+}
+
+.article-card__year {
+  font-size: 0.8rem;
+  min-width: 40px;
+  flex-shrink: 0;
+}
+
+.article-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.article-card__title {
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+.article-card__body:has(.article-card__subtitle) .article-card__title {
+  margin-bottom: 4px;
+}
+
+.article-card__subtitle {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.article-card__views {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Post byline: en móvil, compartidos/vistas como icono + número */
+.article-byline-stat {
+  display: inline-flex;
+  align-items: center;
+}
+
+.article-byline-stat__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.article-byline-stat__icon-row {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+}
+
+.article-byline-stat__icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.article-byline-stat__num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Post byline: autor | fecha; en móvil solo fecha + relativo (sin @ ni |) */
+.article-byline__author {
+  text-decoration: none;
+}
+
+.article-byline__author:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 520px) {
+  .article-byline__author,
+  .article-byline__sep {
+    display: none !important;
+  }
+
+  .article-byline-stat__text {
+    display: none;
+  }
+
+  .article-byline-stat__icon-row {
+    display: inline-flex;
+  }
+
+  .site-header__nav {
+    gap: 10px 14px;
+  }
+}
+
+/* Sticky article title + subtitle while reading */
+.article-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--background);
+  padding-top: 16px;
+  padding-bottom: 14px;
+}
+
+/* Artículo largo con índice lateral + scroll spy (p. ej. Obelysk) */
+.article-prose--obelysk {
+  max-width: none;
+}
+
+.article-with-toc {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  max-width: calc(100% + 210px + 2rem);
+  margin-left: calc(-210px - 2rem);
+}
+
+.article-toc {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.article-toc::-webkit-scrollbar {
+  display: none;
+}
+
+.article-toc__lead {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0 0 1rem;
+  padding-left: 12px;
+}
+
+.article-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.article-toc__link {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.42;
+  padding: 0.32rem 0 0.32rem 12px;
+  border-left: 3px solid transparent;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    font-weight 0.15s ease;
+}
+
+.article-toc__link:hover {
+  color: var(--foreground);
+}
+
+.article-toc__link.is-active {
+  color: var(--foreground);
+  font-weight: 600;
+  border-left-color: #2563eb;
+}
+
+.article-with-toc__main {
+  min-width: 0;
+}
+
+/* Enlace oficial Obelysk: subrayado muy sutil */
+.article-prose a.article-obelysk-link,
+.article-section__heading a.article-obelysk-link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--foreground) 22%, transparent);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  color: inherit;
+}
+
+.article-prose a.article-obelysk-link:hover,
+.article-section__heading a.article-obelysk-link:hover {
+  text-decoration-color: color-mix(in srgb, var(--foreground) 42%, transparent);
+  opacity: 1;
+}
+
+.article-section__heading a.article-obelysk-link {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.article-section {
+  scroll-margin-top: 5.5rem;
+  margin-bottom: clamp(2rem, 5vw, 2.75rem);
+}
+
+.article-section__heading {
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.18rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  color: var(--foreground);
+}
+
+.article-section__num {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.article-section__title-wrap {
+  font-weight: 600;
+}
+
+.article-section__body {
+  min-width: 0;
+}
+
+.article-section__body > p:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .article-with-toc {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .article-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 0.5rem;
+  }
+
+  .article-toc__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .article-toc__link {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--glass-border) 35%, transparent);
+  }
+
+  .article-toc__link.is-active {
+    border-left: none;
+    border-bottom-color: #2563eb;
+    background: color-mix(in srgb, var(--glass-border) 55%, transparent);
+  }
+}
+
+/* FAQ / HowTo (MDX + JSON-LD) */
+.article-faq {
+  margin: 2.25rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.article-faq__heading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.article-faq__list {
+  margin: 0;
+}
+
+.article-faq__list dt {
+  margin-top: 1.25rem;
+}
+
+.article-faq__list dt:first-of-type {
+  margin-top: 0;
+}
+
+.article-faq__q {
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  font-size: 0.98rem;
+}
+
+.article-faq__a {
+  margin: 0 0 1rem;
+  padding-left: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.article-faq__list dd:last-of-type {
+  margin-bottom: 0;
+}
+
+.article-howto {
+  margin: 2.25rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.article-howto__title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.article-howto__desc {
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+  line-height: 1.55;
+}
+
+.article-howto__steps {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.article-howto__step {
+  margin-bottom: 1rem;
+  padding-left: 0.25rem;
+  line-height: 1.65;
+}
+
+.article-howto__step:last-child {
+  margin-bottom: 0;
+}
+
+.article-howto__step-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--foreground);
+}
+
+.article-howto__step-text {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Marco estándar imagen destacada del artículo */
+.article-hero-clip {
+  width: 100%;
+  max-height: var(--article-hero-max-height);
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 26px;
+}
+
+.article-hero-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--article-hero-aspect-ratio);
+}
+
+/* Typography */
+h1 {
+  font-size: var(--h1);
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  line-height: 1.12;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--h2);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+p {
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  font-size: var(--text-md);
+  overflow-wrap: anywhere;
+}
+
+.text-muted {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+/* Media elements should never overflow */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better tap targets on small screens */
+@media (max-width: 520px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* Minimal text-buttons */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--glass-border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.article-citation {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.85em;
+  font-style: italic;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--glass-border) 40%, transparent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}

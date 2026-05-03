@@ -1,0 +1,207 @@
+---
+title: "¿SLMs para América Latina?"
+subtitle: "Cómo una nueva generación de modelos de lenguaje puede acercar la IA a la realidad latinoamericana, sin renunciar a los grandes modelos."
+date: "2026-05-03"
+author: "rodgmont"
+tags: ["Ideas", "Research"]
+image: "/images/sml-hero.jpg"
+imageAlt: "A conceptual representation of AI and Latin America"
+toc:
+  - "Un momento clave para la IA en la región"
+  - "¿Qué se entiende por Small Language Models?"
+  - "LLMs hoy: una pieza central del ecosistema"
+  - "Lo que ya demuestran los SLMs en la práctica"
+  - "Por qué los SLMs encajan con la realidad latinoamericana"
+  - "Qué ganan gobiernos y grandes organizaciones con SLMs"
+  - "Qué ganan pymes, microempresas y startups"
+  - "Impacto para las personas usuarias finales"
+  - "Casos de uso: del borde a la oficina"
+  - "Qué implica crear y operar SLMs"
+  - "Soberanía digital y ecosistemas regionales"
+  - "Hacia una arquitectura híbrida con LLMs y SLMs"
+  - "Construir la IA que América Latina necesita"
+views: 0
+shares: 0
+faq:
+  heading: "Respuestas rápidas"
+  items:
+    - question: "¿Qué son los SLMs?"
+      answer: "Modelos diseñados para ser eficientes en consumo de recursos, especializados en tareas concretas y desplegables en entornos con recursos limitados."
+    - question: "¿Reemplazarán los SLMs a los grandes modelos (LLMs)?"
+      answer: "No, la propuesta es una arquitectura híbrida. Los SLMs como motores locales cotidianos y los LLMs en la nube como oráculos para razonamiento complejo."
+howTo:
+  name: "Cómo adoptar SLMs en América Latina"
+  description: "Pasos clave para integrar SLMs en estrategias de tecnología regional."
+  steps:
+    - name: "Evaluar las limitaciones estructurales"
+      text: "Identificar brechas de conectividad y presupuestos de infraestructura local."
+    - name: "Diseñar una arquitectura híbrida"
+      text: "Utilizar SLMs locales para interacciones diarias y LLMs remotos solo cuando aporten un valor diferencial."
+    - name: "Entrenar con datos locales"
+      text: "Ajustar modelos con contextos propios para adaptar las soluciones a la jerga y procesos de cada negocio."
+---
+
+<ArticleSection section="1" title="Un momento clave para la IA en la región">
+
+En pocos años, la inteligencia artificial pasó de ser tema de papers y conferencias a convertirse en parte de la infraestructura diaria de empresas, gobiernos y personas. América Latina no es la excepción, ya que más de la mitad de las empresas de la región ya experimentan con IA, incluida IA generativa, aunque con presupuestos y capacidades muy desiguales. <a href="https://reports.weforum.org/docs/WEF_Latin_America_Intelligent_Age.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">reports.weforum</a>
+
+Al mismo tiempo han surgido iniciativas como _[Latam GPT](https://knowledgegov.org/latam-gpt-a-culturally-sensitive-large-language-model-for-latin-america/)_, un modelo de lenguaje entrenado con datos, idiomas y contextos propios de la región, pensado como infraestructura abierta y colaborativa para América Latina. Este tipo de esfuerzos marca un punto de inflexión, porque la conversación ya no es solo cómo usar modelos creados fuera, sino también qué tipo de modelos queremos construir y desplegar desde la región. <a href="https://knowledgegov.org/latam-gpt-a-culturally-sensitive-large-language-model-for-latin-america/" target="_blank" rel="noopener noreferrer" className="article-citation">knowledgegov</a>
+
+</ArticleSection>
+
+<ArticleSection section="2" title="¿Qué se entiende por Small Language Models?">
+
+En la conversación pública se suele agrupar casi todo bajo la etiqueta de Large Language Models. Sin embargo, en los últimos años está emergiendo otra familia con identidad propia: los Small Language Models. Aunque si soy sincero, a lo largo de este texto prefiero llamarlos *Smart* Language Models. Rompiendo un poco la cuarta pared, creo firmemente que de "small" tienen poco; bien aplicados, estos modelos pueden alcanzar capacidades que asustarían a más de un LLM gigante. <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="article-citation">linkedin</a>
+
+Cuando se habla de SLMs nos referimos a modelos diseñados con tres objetivos principales:
+
+- Ser eficientes en consumo de recursos, con menos parámetros, menos memoria y menor uso de energía. <a href="https://www.acm.org" target="_blank" rel="noopener noreferrer" className="article-citation">acm</a>
+- Estar especializados en tareas y dominios concretos, en lugar de intentar cubrir todo el espacio de problemas posibles. <a href="https://arxiv.org/abs/2411.03350" target="_blank" rel="noopener noreferrer" className="article-citation">arxiv</a>
+- Poder desplegarse en entornos con recursos limitados, desde servidores modestos hasta dispositivos en el borde. <a href="https://www.infoq.com" target="_blank" rel="noopener noreferrer" className="article-citation">infoq</a>
+
+Por ejemplo, el paper _[A Comprehensive Survey of Small Language Models in the Era of Large Language Models](https://arxiv.org/abs/2411.03350)_ propone justamente esta línea: modelos más pequeños con baja latencia de inferencia, menor coste y mayor facilidad de personalización, especialmente pensados para entornos con recursos limitados. Este tipo de trabajos insiste en que no son versiones recortadas de modelos más grandes, sino modelos diseñados para ser lo bastante potentes para resolver problemas reales y lo bastante ligeros para ejecutarse cerca de las personas. <a href="https://pure.psu.edu" target="_blank" rel="noopener noreferrer" className="article-citation">pure.psu</a>
+
+</ArticleSection>
+
+<ArticleSection section="3" title="LLMs hoy: una pieza central del ecosistema">
+
+Los grandes modelos de lenguaje siguen siendo fundamentales para muchas aplicaciones que hoy consideramos básicas. En particular resultan muy valiosos cuando se necesita:
+
+- Cobertura muy amplia de temas y lenguajes. <a href="https://mistral.ai/news/mistral-small-4" target="_blank" rel="noopener noreferrer" className="article-citation">mistral</a>
+- Razonamiento complejo entre dominios distintos. <a href="https://encord.com" target="_blank" rel="noopener noreferrer" className="article-citation">encord</a>
+- Funcionalidades frontier como agentes multipaso, integración con herramientas y capacidades multimodales. <a href="https://mistral.ai/news/mistral-small-4" target="_blank" rel="noopener noreferrer" className="article-citation">mistral</a>
+
+En la práctica, bancos, empresas de telecomunicaciones y gobiernos de la región ya consumen servicios de LLMs a través de nubes globales para explorar copilotos internos, analítica avanzada y nuevos productos digitales. Desde esta perspectiva los LLMs son una pieza clave de la infraestructura global de IA y probablemente lo seguirán siendo, especialmente para actores con grandes volúmenes de datos y altos requisitos de desempeño. <a href="https://edgeuno.com" target="_blank" rel="noopener noreferrer" className="article-citation">edgeuno</a>
+
+La pregunta que me interesa no es si los LLMs están bien o mal. La pregunta es si tiene sentido que sean la única o la principal forma de desplegar IA en América Latina, considerando la diversidad de contextos y restricciones que existen en la región. <a href="https://reports.weforum.org/docs/WEF_Latin_America_Intelligent_Age.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">reports.weforum</a>
+
+</ArticleSection>
+
+<ArticleSection section="4" title="Lo que ya demuestran los SLMs en la práctica">
+
+El avance reciente de los SLMs muestra que la escala no es la única fuente de capacidad. Tres ejemplos ilustran bien esta idea:
+
+- _[TinyLlama](https://arxiv.org/abs/2401.02385)_, un modelo compacto de alrededor de mil cien millones de parámetros, fue preentrenado con cerca de un billón de tokens y logra resultados competitivos frente a otros modelos abiertos más grandes en su rango, aprovechando la arquitectura de Llama 2 y técnicas de eficiencia como FlashAttention. <a href="https://arxiv.org/abs/2411.03350" target="_blank" rel="noopener noreferrer" className="article-citation">arxiv</a>
+- La familia _[Phi 3](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/affordable-innovation-unveiling-the-pricing-of-phi-3-slms-on-models-as-a-service/4173411)_ de Microsoft muestra que modelos en torno a tres o cuatro mil millones de parámetros se aproximan al rendimiento de modelos de muchas decenas de miles de millones en tareas de razonamiento, código y comprensión, con un coste de inferencia significativamente menor y pensados para dispositivos con recursos limitados. <a href="https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/affordable-innovation-unveiling-the-pricing-of-phi-3-slms-on-models-as-a-service/4173411" target="_blank" rel="noopener noreferrer" className="article-citation">techcommunity.microsoft</a>
+- _[Mistral Small 4](https://mistral.ai/news/mistral-small-4)_ iguala o supera modelos mucho más grandes en varios benchmarks, y además ofrece menor latencia y mayor rendimiento en entornos de producción optimizados.
+
+Estudios sobre despliegue de modelos de lenguaje en hardware embebido muestran también que modelos cuantizados con alrededor de mil millones de parámetros pueden correr en dispositivos como Raspberry Pi con velocidades de generación útiles para aplicaciones reales. Todo esto sugiere que los modelos más compactos pueden cumplir una parte importante del trabajo en el día a día, especialmente cuando el contexto está bien definido. <a href="https://arxiv.org/abs/2411.03350" target="_blank" rel="noopener noreferrer" className="article-citation">arxiv</a>
+
+</ArticleSection>
+
+<ArticleSection section="5" title="Por qué los SLMs encajan con la realidad latinoamericana">
+
+América Latina combina oportunidades importantes con limitaciones estructurales claras. Informes como el _[Latin American Artificial Intelligence Index ILIA 2024](https://indicelatam.cl/wp-content/uploads/2025/01/ILIA_2024_Ingles_020125_compressed.pdf)_ y el reporte del Foro Económico Mundial _[Latin America in the Intelligent Age](https://reports.weforum.org/docs/WEF_Latin_America_Intelligent_Age.pdf)_ destacan, entre otros factores: <a href="https://indicelatam.cl/wp-content/uploads/2025/01/ILIA_2024_Ingles_020125_compressed.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">cepal</a>
+
+- Brechas de conectividad entre zonas urbanas, rurales y periurbanas.
+- Infraestructuras de cómputo muy heterogéneas entre corporativos globales y pymes locales.
+- Presupuestos de tecnología limitados, en especial en micro, pequeñas y medianas empresas.
+- Marcos regulatorios emergentes sobre datos, privacidad y soberanía digital.
+
+En este contexto, los SLMs ofrecen varias ventajas técnicas y operativas:
+
+- Permiten ejecución local en servidores modestos o en el borde, lo que reduce dependencia de conexiones permanentes a la nube y mejora la latencia. <a href="https://meegle.com" target="_blank" rel="noopener noreferrer" className="article-citation">meegle</a>
+- Consumen menos recursos en memoria, energía y ancho de banda, de manera que pueden funcionar sobre infraestructuras existentes sin grandes inversiones iniciales. <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="article-citation">github</a>
+- Facilitan un mayor control sobre los datos, ya que el procesamiento puede realizarse en infra local o en nubes regionales, ayudando a cumplir requisitos de residencia y regulación. <a href="https://regulaite.eu/images/pdf/Amado2025.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">regulaite</a>
+
+Una hipótesis razonable es que, para muchas aplicaciones cotidianas de la región, la combinación de eficiencia, cercanía y control que ofrecen los SLMs se alinea mejor con la realidad que una estrategia basada únicamente en grandes modelos remotos. <a href="https://www.linuxfoundation.org/hubfs/Research%20Reports/Economic_Workforce_Impacts_AI_LatAm_Report.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">linuxfoundation</a>
+
+</ArticleSection>
+
+<ArticleSection section="6" title="Qué ganan gobiernos y grandes organizaciones con SLMs">
+
+Para gobiernos y grandes corporativos, los SLMs permiten acercar la inteligencia a sus propios datos y marcos de cumplimiento. Algunos ejemplos que ya se observan en proyectos reales e investigaciones son:
+
+- En el sector público, iniciativas como _[Latam GPT](https://www.wired.com/story/latam-gpt-the-free-open-source-and-collaborative-ai-of-latin-america/)_ exploran modelos entrenados con datos legales, administrativos y culturales de la región, lo que mejora la pertinencia de asistentes para políticas públicas, justicia, educación y servicios ciudadanos. <a href="https://www.wired.com/story/latam-gpt-the-free-open-source-and-collaborative-ai-of-latin-america/" target="_blank" rel="noopener noreferrer" className="article-citation">wired</a>
+- En industrias reguladas como finanzas, salud o energía, estudios como _[AI Sovereignty in Latin America](https://regulaite.eu/images/pdf/Amado2025.pdf)_ subrayan la importancia de ejecutar modelos en centros de datos propios o nubes regionales para facilitar el cumplimiento de requisitos de protección de datos y auditoría de modelos. <a href="https://americasquarterly.org" target="_blank" rel="noopener noreferrer" className="article-citation">americasquarterly</a>
+- En grandes corporativos, la literatura sobre SLMs muestra que estos modelos pueden actuar como copilotos de dominio, especializados en contratos locales, regulaciones nacionales o catálogos internos, entrenados con datos y vocabulario específicos de la organización. <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="article-citation">linkedin</a>
+
+Desde esta perspectiva los SLMs no sustituyen a los grandes modelos, sino que añaden una capa de IA que vive más cerca de los datos y de los procesos críticos.
+
+</ArticleSection>
+
+<ArticleSection section="7" title="Qué ganan pymes, microempresas y startups">
+
+Las pymes representan la mayor parte del tejido productivo de la región y generan una fracción muy relevante del empleo formal. El informe de la Linux Foundation _[Economic and Workforce Impacts of AI in Latin America](https://www.linuxfoundation.org/hubfs/Research%20Reports/Economic_Workforce_Impacts_AI_LatAm_Report.pdf)_ muestra que muchas de estas empresas ya usan IA pero enfrentan barreras de capital, talento y tiempo para una adopción más profunda. <a href="https://reports.weforum.org/docs/WEF_Latin_America_Intelligent_Age.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">reports.weforum</a>
+
+En ese contexto los SLMs resultan especialmente interesantes porque:
+
+- Pueden correr sobre servidores ya existentes o infraestructuras modestas, lo que reduce el coste inicial de adopción. <a href="https://www.infoq.com" target="_blank" rel="noopener noreferrer" className="article-citation">infoq</a>
+- El ecosistema de software libre permite empaquetarlos en soluciones listas para usar, como asistentes para ventas, soporte, logística, contabilidad o atención al cliente en español latinoamericano. <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="article-citation">github</a>
+- La posibilidad de ajustar modelos con datos propios, incluso si son limitados, ayuda a que estas soluciones se adapten a la jerga, las reglas y los procesos de cada negocio. <a href="https://arxiv.org/abs/2411.03350" target="_blank" rel="noopener noreferrer" className="article-citation">arxiv</a>
+
+Si la región logra que las pymes accedan a SLMs como infraestructura asequible y sencilla de integrar, existe margen para reducir una parte de la brecha de productividad frente a empresas más grandes. <a href="https://www.linuxfoundation.org/hubfs/Research%20Reports/Economic_Workforce_Impacts_AI_LatAm_Report.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">linuxfoundation</a>
+
+</ArticleSection>
+
+<ArticleSection section="8" title="Impacto para las personas usuarias finales">
+
+Desde la perspectiva de las personas que usan estas tecnologías en su vida diaria, los SLMs tienen efectos directos sobre la experiencia, la privacidad y la accesibilidad.
+
+- Al ejecutarse en dispositivos o infra cercana, es más sencillo que datos sensibles como historial médico, información financiera o contenido educativo personalizado se procesen localmente, reduciendo la exposición a servicios externos. <a href="https://www.flolive.net" target="_blank" rel="noopener noreferrer" className="article-citation">flolive</a>
+- La posibilidad de funcionar con conectividad intermitente o incluso sin conexión es crucial en zonas rurales, regiones amazónicas, comunidades andinas o barrios con infraestructura limitada, donde depender únicamente de la nube puede dejar a muchas personas fuera. <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="article-citation">linkedin</a>
+- Los esfuerzos por entrenar modelos con datos de la región, como en el proyecto _[Latam GPT](https://nextbillion.net/news/latin-america-takes-on-cultural-bias-with-new-ai-language-model/)_, ayudan a que la IA entienda mejor matices del español latinoamericano, lenguas indígenas y contextos culturales locales. <a href="https://nextbillion.net/news/latin-america-takes-on-cultural-bias-with-new-ai-language-model/" target="_blank" rel="noopener noreferrer" className="article-citation">nextbillion</a>
+
+En conjunto los SLMs son una herramienta para que la IA se sienta menos lejana y más alineada con la diversidad real de quienes la usan en América Latina.
+
+</ArticleSection>
+
+<ArticleSection section="9" title="Casos de uso: del borde a la oficina">
+
+La literatura técnica y los reportes industriales recogen múltiples patrones de uso de modelos compactos en el borde que resultan muy relevantes para la región. Entre ellos destacan: <a href="https://meegle.com" target="_blank" rel="noopener noreferrer" className="article-citation">meegle</a>
+
+- En industria y agro se utilizan para análisis local de sensores, mantenimiento predictivo, monitoreo de maquinaria y apoyo a técnicos en campo mediante dispositivos robustos. <a href="https://www.flolive.net" target="_blank" rel="noopener noreferrer" className="article-citation">flolive</a>
+- En retail y servicios se aplican en kioscos inteligentes de atención, recomendadores de productos en punto de venta y sistemas de soporte en sucursales con conectividad limitada. <a href="https://plavno.io" target="_blank" rel="noopener noreferrer" className="article-citation">plavno</a>
+- En salud y educación se exploran asistentes que ayudan a profesionales a organizar notas y protocolos respetando la residencia de datos, así como tutores educativos que funcionan en escuelas con conectividad inestable. <a href="https://regulaite.eu/images/pdf/Amado2025.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">regulaite</a>
+
+En muchos de estos escenarios tiene sentido una arquitectura híbrida, donde un SLM resuelve la mayoría de interacciones en el borde y un gran modelo remoto se consulta solo cuando se requiere un nivel de razonamiento o conocimiento global más profundo. <a href="https://plavno.io" target="_blank" rel="noopener noreferrer" className="article-citation">plavno</a>
+
+</ArticleSection>
+
+<ArticleSection section="10" title="Qué implica crear y operar SLMs">
+
+Construir y desplegar SLMs implica pensar la cadena completa con la eficiencia como requisito, no solo reducir el tamaño de un modelo existente. En términos generales suele abarcar: <a href="https://www.acm.org" target="_blank" rel="noopener noreferrer" className="article-citation">acm</a>
+
+- Diseñar arquitecturas y pipelines de entrenamiento eficientes, con modelos compactos, atención optimizada y uso cuidadoso de datos, como muestran trabajos sobre _[TinyLlama](https://huggingface.co/papers/2401.02385)_ y otros modelos pequeños. <a href="https://huggingface.co/papers/2401.02385" target="_blank" rel="noopener noreferrer" className="article-citation">huggingface</a>
+- Aplicar técnicas de compresión y optimización como quantization, pruning y distillation para reducir tamaño y acelerar la inferencia manteniendo calidad suficiente. <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="article-citation">linkedin</a>
+- Desarrollar prácticas de MLOps adaptadas al borde, incluyendo despliegue en dispositivos y microservidores, monitoreo de calidad y actualización segura de modelos en producción. <a href="https://acnsci.org" target="_blank" rel="noopener noreferrer" className="article-citation">acnsci</a>
+
+Desde el punto de vista de capacidades humanas esto requiere habilidades en aprendizaje profundo, ingeniería de datos, infraestructura y gobernanza de modelos. El índice ILIA y otros estudios sobre capacidades en IA señalan que muchas de estas competencias pueden cultivarse en universidades, comunidades de software libre y empresas locales de la región. <a href="https://indicelatam.cl/wp-content/uploads/2025/01/ILIA_2024_Ingles_020125_compressed.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">cepal</a>
+
+</ArticleSection>
+
+<ArticleSection section="11" title="Soberanía digital y ecosistemas regionales">
+
+Los debates sobre soberanía digital en América Latina plantean una pregunta de fondo sobre el rol de la región en la nueva economía de datos e IA. El trabajo _[AI Sovereignty in Latin America](https://regulaite.eu/images/pdf/Amado2025.pdf)_ analiza la dependencia estructural de la región respecto a infraestructura y modelos desarrollados principalmente en el exterior, y propone caminos para fortalecer capacidades propias en tres dimensiones: semiconductores, infraestructura de cómputo y desarrollo de modelos. <a href="https://www.ucl.ac.uk" target="_blank" rel="noopener noreferrer" className="article-citation">ucl</a>
+
+En paralelo, estudios de organismos multilaterales y académicos recomiendan fortalecer:
+
+- Infraestructura regional en nube, centros de datos y conectividad. <a href="https://agatadata.com" target="_blank" rel="noopener noreferrer" className="article-citation">agatadata</a>
+- Capacidades de desarrollo en IA en el sector público, privado y académico. <a href="https://regulaite.eu/images/pdf/Amado2025.pdf" target="_blank" rel="noopener noreferrer" className="article-citation">regulaite</a>
+- Marcos de gobernanza que permitan innovar y al mismo tiempo protejan derechos y datos de las personas. <a href="https://digiamericas.com" target="_blank" rel="noopener noreferrer" className="article-citation">digiamericas</a>
+
+Proyectos como _[Latam GPT](https://aiworld.eu/story/latam-gpt-a-language-model-made-in-latin-america-for-latin-america)_ van en esa dirección al construir modelos desde y para la región con datos seleccionados y reglas de uso claras. En ese contexto mi lectura es que los SLMs, sobre todo cuando son abiertos y se entrenan o ajustan localmente, encajan bien con una agenda de soberanía, ya que permiten a estados, universidades y startups mantener mayor control sobre la infraestructura de IA que utilizan. <a href="https://aiworld.eu/story/latam-gpt-a-language-model-made-in-latin-america-for-latin-america" target="_blank" rel="noopener noreferrer" className="article-citation">aiworld</a>
+
+</ArticleSection>
+
+<ArticleSection section="12" title="Hacia una arquitectura híbrida con LLMs y SLMs">
+
+Más que oponer grandes modelos y SLMs, la evidencia técnica y el contexto regional apuntan a un enfoque complementario. La idea de una arquitectura híbrida puede resumirse así: <a href="https://arxiv.org/abs/2411.03350" target="_blank" rel="noopener noreferrer" className="article-citation">arxiv</a>
+
+- Usar grandes modelos en la nube como oráculos globales cuando se necesita razonamiento entre dominios, acceso a conocimiento muy amplio o capacidades frontier. <a href="https://encord.com" target="_blank" rel="noopener noreferrer" className="article-citation">encord</a>
+- Usar SLMs locales o en el borde como motores cotidianos para la mayoría de las interacciones, cerca de los datos, con baja latencia y mayor control. <a href="https://www.infoq.com" target="_blank" rel="noopener noreferrer" className="article-citation">infoq</a>
+- Diseñar flujos donde el SLM resuelva la mayoría de los casos estándar y el gran modelo se consulte solo cuando aporta un valor diferencial claro. <a href="https://plavno.io" target="_blank" rel="noopener noreferrer" className="article-citation">plavno</a>
+
+Esta arquitectura permite aprovechar lo mejor de ambos enfoques sin caer en extremos y se adapta bien a la diversidad de contextos que conviven en América Latina.
+
+</ArticleSection>
+
+<ArticleSection section="13" title="Construir la IA que América Latina necesita">
+
+América Latina está entrando en una etapa en la que la IA deja de ser una promesa abstracta y se vuelve parte del día a día de empresas, instituciones y personas. En este camino los grandes modelos de lenguaje aportan una ventana poderosa a capacidades frontier, mientras que los SLMs ofrecen una forma pragmática, eficiente y cercana de aterrizar esas capacidades en la realidad concreta de la región. <a href="https://encord.com" target="_blank" rel="noopener noreferrer" className="article-citation">encord</a>
+
+El reto no es elegir uno y descartar el otro, sino diseñar con intención cómo combinarlos. Apostar por una arquitectura híbrida donde LLMs y SLMs conviven y se complementan puede ayudar a que la región no solo adopte la IA, sino que también participe en su diseño, construyendo modelos, productos y políticas desde su propia diversidad, sus propios idiomas y sus propias prioridades. <a href="https://www.ucl.ac.uk" target="_blank" rel="noopener noreferrer" className="article-citation">ucl</a>
+
+Más que preguntarnos si necesitamos modelos más grandes o más pequeños, la pregunta que me interesa dejar abierta es otra. Qué tipo de inteligencia artificial queremos desplegar en América Latina y para quién la estamos construyendo.
+
+</ArticleSection>
