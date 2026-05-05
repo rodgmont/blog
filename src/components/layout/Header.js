@@ -1,14 +1,23 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { IconX } from '@/components/shared/SocialIcons';
 import { DEFAULT_LOCALE } from '@/i18n/config';
 import { aboutPath, blogPath, homePath } from '@/lib/paths';
 
 export default function Header({ locale = DEFAULT_LOCALE, messages }) {
+  const pathname = usePathname() || '';
+  const isPortfolio = pathname.includes('/portfolio');
+
   return (
     <header className="site-header">
       <div className="site-header__inner container">
-        <Link href={homePath(locale)} className="site-header__brand">
-          Fran Rodgmont
+        <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          <span>Fran Rodgmont</span>
+          {isPortfolio && (
+            <span style={{ fontWeight: 400 }}>{messages?.nav?.portfolio ?? 'Portfolio'}</span>
+          )}
         </Link>
 
         <nav className="site-header__nav" aria-label="Main">

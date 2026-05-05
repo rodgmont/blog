@@ -3,7 +3,7 @@ import LanguageSwitch from '@/components/layout/LanguageSwitch';
 import Link from 'next/link';
 import { portfolioPath } from '@/lib/paths';
 
-export default function Footer({ locale }) {
+export default function Footer({ locale, messages }) {
   return (
     <footer className="site-footer">
       <div className="container site-footer__inner">
@@ -22,7 +22,7 @@ export default function Footer({ locale }) {
             style={{ display: 'flex', alignItems: 'center' }}
           >
             <IconBriefcase size={16} />
-            <span>Portfolio</span>
+            <span>{messages?.nav?.portfolio ?? 'Portfolio'}</span>
           </Link>
           <a
             href="https://github.com/rodgmont"

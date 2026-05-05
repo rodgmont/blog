@@ -15,7 +15,7 @@ export default async function LocaleLayout({ children, params }) {
       <JsonLd data={buildSiteGraphJsonLd(locale)} />
       <Header locale={locale} messages={messages} />
       <main>{children}</main>
-      <Footer locale={locale} />
+      <Footer locale={locale} messages={messages} />
     </>
   );
 }
