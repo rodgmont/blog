@@ -8,7 +8,7 @@ import { aboutPath, blogPath, homePath } from '@/lib/paths';
 
 export default function Header({ locale = DEFAULT_LOCALE, messages }) {
   const pathname = usePathname() || '';
-  const isPortfolio = pathname.includes('/portfolio');
+  const isPortfolio = pathname.includes('/portfolio') || pathname.includes('/portafolio');
 
   return (
     <header className="site-header">
@@ -16,7 +16,7 @@ export default function Header({ locale = DEFAULT_LOCALE, messages }) {
         <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
           <span>Fran Rodgmont</span>
           {isPortfolio && (
-            <span style={{ fontWeight: 300, fontSize: '0.72em', color: 'var(--muted)', letterSpacing: '0.01em' }}>
+            <span style={{ fontWeight: 500, fontSize: '0.78em', color: 'var(--muted)', letterSpacing: '0.01em' }}>
               {messages?.nav?.portfolio ?? 'Portfolio'}
             </span>
           )}
