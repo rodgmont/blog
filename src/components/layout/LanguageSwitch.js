@@ -10,8 +10,13 @@ export function pathForOtherLocale(pathname, targetLocale) {
   if (segs[0] === 'es') {
     rest = segs.length > 1 ? `/${segs.slice(1).join('/')}` : '/';
   }
+  // Map ES slug /portafolio → EN slug /portfolio
+  if (rest === '/portafolio') rest = '/portfolio';
+
   if (targetLocale === 'es') {
     if (rest === '/' || rest === '') return '/es';
+    // Map EN slug /portfolio → ES slug /portafolio
+    if (rest === '/portfolio') return '/es/portafolio';
     return `/es${rest}`;
   }
   return rest === '' ? '/' : rest;

@@ -16,7 +16,7 @@ function setLocaleCookie(res, value) {
 }
 
 function isLocaleablePath(pathname) {
-  if (pathname === '/' || pathname === '/blog' || pathname === '/about' || pathname === '/portfolio') return true;
+  if (pathname === '/' || pathname === '/blog' || pathname === '/about' || pathname === '/portfolio' || pathname === '/portafolio') return true;
   if (/^\/blog\/[^/]+$/.test(pathname)) return true;
   if (pathname === '/es' || pathname.startsWith('/es/')) {
     const rest = pathname === '/es' ? '/' : pathname.slice(3) || '/';
@@ -88,6 +88,14 @@ export function proxy(req) {
   const first = segments[0];
 
   if (first === 'es') {
+    // Rewrite /es/portafolio → /es/portfolio (ES-localized slug)
+    if (pathname === '/es/portafolio') {
+      const url = req.nextUrl.clone();
+      url.pathname = '/es/portfolio';
+      const res = NextResponse.rewrite(url);
+      setLocaleCookie(res, 'es');
+      return res;
+    }
     const res = NextResponse.next();
     setLocaleCookie(res, 'es');
     return res;
@@ -102,6 +110,7 @@ export function proxy(req) {
     pathname === '/blog' ||
     pathname === '/about' ||
     pathname === '/portfolio' ||
+    pathname === '/portafolio' ||
     /^\/blog\/[^/]+$/.test(pathname);
 
   if (isLocaleable) {

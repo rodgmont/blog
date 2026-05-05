@@ -39,5 +39,6 @@ export function absolutePostUrl(locale, slug) {
 }
 
 export function portfolioPath(locale) {
-  return publicPath(locale, '/portfolio');
+  if (locale === 'es') return '/es/portafolio';
+  return '/portfolio';
 }
