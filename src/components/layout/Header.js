@@ -13,10 +13,12 @@ export default function Header({ locale = DEFAULT_LOCALE, messages }) {
   return (
     <header className="site-header">
       <div className="site-header__inner container">
-        <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+        <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
           <span>Fran Rodgmont</span>
           {isPortfolio && (
-            <span style={{ fontWeight: 400 }}>{messages?.nav?.portfolio ?? 'Portfolio'}</span>
+            <span style={{ fontWeight: 300, fontSize: '0.72em', color: 'var(--muted)', letterSpacing: '0.01em' }}>
+              {messages?.nav?.portfolio ?? 'Portfolio'}
+            </span>
           )}
         </Link>
 
