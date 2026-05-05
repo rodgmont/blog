@@ -37,3 +37,7 @@ export function postPath(locale, slug) {
 export function absolutePostUrl(locale, slug) {
   return absolutePublicUrl(locale, `/blog/${slug}`);
 }
+
+export function portfolioPath(locale) {
+  return publicPath(locale, '/portfolio');
+}

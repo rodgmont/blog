@@ -1,5 +1,7 @@
-import { IconGithub } from '@/components/shared/SocialIcons';
+import { IconGithub, IconBriefcase } from '@/components/shared/SocialIcons';
 import LanguageSwitch from '@/components/layout/LanguageSwitch';
+import Link from 'next/link';
+import { portfolioPath } from '@/lib/paths';
 
 export default function Footer({ locale }) {
   return (
@@ -13,6 +15,15 @@ export default function Footer({ locale }) {
 
         <div className="site-footer__actions">
           <LanguageSwitch locale={locale} />
+          <Link 
+            href={portfolioPath(locale)} 
+            className="text-muted no-fade site-footer__github" 
+            aria-label="Portfolio"
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            <IconBriefcase size={16} />
+            <span>Portfolio</span>
+          </Link>
           <a
             href="https://github.com/rodgmont"
             target="_blank"
