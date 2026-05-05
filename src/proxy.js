@@ -16,7 +16,7 @@ function setLocaleCookie(res, value) {
 }
 
 function isLocaleablePath(pathname) {
-  if (pathname === '/' || pathname === '/blog' || pathname === '/about') return true;
+  if (pathname === '/' || pathname === '/blog' || pathname === '/about' || pathname === '/portfolio') return true;
   if (/^\/blog\/[^/]+$/.test(pathname)) return true;
   if (pathname === '/es' || pathname.startsWith('/es/')) {
     const rest = pathname === '/es' ? '/' : pathname.slice(3) || '/';
@@ -101,6 +101,7 @@ export function proxy(req) {
     pathname === '/' ||
     pathname === '/blog' ||
     pathname === '/about' ||
+    pathname === '/portfolio' ||
     /^\/blog\/[^/]+$/.test(pathname);
 
   if (isLocaleable) {
