@@ -2,7 +2,7 @@ import { DEFAULT_LOCALE } from './config';
 
 const MESSAGES = {
   en: {
-    nav: { about: 'About', followMe: 'Follow me', backToBlog: '← Back to blog', portfolio: 'Portfolio' },
+    nav: { about: 'About', followMe: 'Follow me', backToBlog: '← Back to blog', backToPortfolio: '← Back to Portfolio', portfolio: 'Portfolio' },
     home: { latest: 'Latest posts', viewAll: 'View all →' },
     blog: {
       title: 'Blog',
@@ -29,7 +29,7 @@ const MESSAGES = {
     },
   },
   es: {
-    nav: { about: 'Sobre', followMe: 'Sígueme', backToBlog: '← Volver al blog', portfolio: 'Portafolio' },
+    nav: { about: 'Sobre', followMe: 'Sígueme', backToBlog: '← Volver al blog', backToPortfolio: '← Volver al portafolio', portfolio: 'Portafolio' },
     home: { latest: 'Últimos artículos', viewAll: 'Ver todos →' },
     blog: {
       title: 'Blog',

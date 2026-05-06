@@ -42,3 +42,9 @@ export function portfolioPath(locale) {
   if (locale === 'es') return '/es/portafolio';
   return '/portfolio';
 }
+
+/** Ruta del detalle de un proyecto: /portfolio/[slug] | /es/portafolio/[slug] */
+export function portfolioProjectPath(locale, slug) {
+  if (locale === 'es') return `/es/portafolio/${slug}`;
+  return `/portfolio/${slug}`;
+}

@@ -100,3 +100,16 @@ export const PORTFOLIO_DATA = {
 export function getPortfolioData(locale) {
   return PORTFOLIO_DATA[locale] ?? PORTFOLIO_DATA.en;
 }
+
+/**
+ * Busca un proyecto por su ID (slug) en todos los temas del locale dado.
+ * Retorna { project, theme } o null si no se encuentra.
+ */
+export function getProjectBySlug(slug, locale) {
+  const data = getPortfolioData(locale);
+  for (const group of data) {
+    const project = group.projects.find((p) => p.id === slug);
+    if (project) return { project, theme: group.theme };
+  }
+  return null;
+}

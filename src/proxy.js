@@ -18,6 +18,7 @@ function setLocaleCookie(res, value) {
 function isLocaleablePath(pathname) {
   if (pathname === '/' || pathname === '/blog' || pathname === '/about' || pathname === '/portfolio' || pathname === '/portafolio') return true;
   if (/^\/blog\/[^/]+$/.test(pathname)) return true;
+  if (/^\/portfolio\/[^/]+$/.test(pathname)) return true;
   if (pathname === '/es' || pathname.startsWith('/es/')) {
     const rest = pathname === '/es' ? '/' : pathname.slice(3) || '/';
     return isLocaleablePath(rest);
@@ -88,10 +89,19 @@ export function proxy(req) {
   const first = segments[0];
 
   if (first === 'es') {
-    // Rewrite /es/portafolio → /es/portfolio (ES-localized slug)
+    // Rewrite /es/portafolio → /es/portfolio (slug ES)
     if (pathname === '/es/portafolio') {
       const url = req.nextUrl.clone();
       url.pathname = '/es/portfolio';
+      const res = NextResponse.rewrite(url);
+      setLocaleCookie(res, 'es');
+      return res;
+    }
+    // Rewrite /es/portafolio/[slug] → /es/portfolio/[slug]
+    if (/^\/es\/portafolio\/[^/]+$/.test(pathname)) {
+      const slug = pathname.split('/').pop();
+      const url = req.nextUrl.clone();
+      url.pathname = `/es/portfolio/${slug}`;
       const res = NextResponse.rewrite(url);
       setLocaleCookie(res, 'es');
       return res;
@@ -111,7 +121,8 @@ export function proxy(req) {
     pathname === '/about' ||
     pathname === '/portfolio' ||
     pathname === '/portafolio' ||
-    /^\/blog\/[^/]+$/.test(pathname);
+    /^\/blog\/[^/]+$/.test(pathname) ||
+    /^\/portfolio\/[^/]+$/.test(pathname);
 
   if (isLocaleable) {
     const fromCookie = readLocaleCookie(req.cookies.get(LOCALE_COOKIE)?.value);
