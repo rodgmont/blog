@@ -13,12 +13,20 @@ export default function Header({ locale = DEFAULT_LOCALE, messages }) {
   return (
     <header className="site-header">
       <div className="site-header__inner container">
-        <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+        <Link href={homePath(locale)} className="site-header__brand" style={{ display: 'flex', alignItems: 'baseline', gap: '0' }}>
+          {/* Nombre principal — siempre en bold (700 heredado de .site-header__brand) */}
           <span>Fran Rodgmont</span>
+
+          {/* Subtítulo "Portfolio / Portafolio" — solo visible en rutas /portfolio y /portafolio */}
           {isPortfolio && (
-            <span style={{ fontWeight: 500, fontSize: '0.78em', color: 'var(--muted)', letterSpacing: '0.01em' }}>
-              {messages?.nav?.portfolio ?? 'Portfolio'}
-            </span>
+            <>
+              {/* Separador visual estilo editorial */}
+              <span aria-hidden="true" style={{ fontWeight: 300, color: 'var(--muted)', margin: '0 6px', fontSize: '0.85em' }}>·</span>
+              {/* Etiqueta ligera: font-weight 300 para diferenciarse del nombre sin desaparecer */}
+              <span style={{ fontWeight: 300, fontSize: '0.85em', color: 'var(--muted)', letterSpacing: '0.02em' }}>
+                {messages?.nav?.portfolio ?? 'Portfolio'}
+              </span>
+            </>
           )}
         </Link>
 
