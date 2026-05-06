@@ -1,27 +1,57 @@
+/**
+ * PortfolioGrid — Cuadrícula de proyectos al estilo Meta
+ *
+ * Layout:
+ *   - [par]      → 2 cards medianas side-by-side (aspect-ratio 16:9)
+ *   - [featured] → 1 card ancha a full-width  (aspect-ratio 21:9)
+ *   - [par]      → ...se repite el patrón
+ *
+ * Las cards son full-bleed: la imagen ocupa 100% del área y el texto
+ * se posiciona absolutamente al fondo sobre un gradiente.
+ *
+ * Props del componente raíz:
+ *   projects  – Array<Project>   Lista de proyectos ya preparada por el servidor
+ *   locale    – string           'en' | 'es' (no usado internamente, pasa al padre)
+ *   messages  – object           Textos i18n (no usados en cards, disponibles para extensión)
+ */
+
 'use client';
 
 import Image from 'next/image';
 
-// ─── Single Card ──────────────────────────────────────────────────────────────
-function ProjectCard({ project, featured }) {
+/* ─────────────────────────────────────────────────────────────────────────────
+   ProjectCard
+   Una card individual. Puede ser "featured" (ancha) o normal (par).
+   Si tiene `link`, toda la card se convierte en elemento interactivo.
+───────────────────────────────────────────────────────────────────────────── */
+function ProjectCard({ project, featured = false }) {
   const isExternal = project.link?.startsWith('http');
-  const href = project.link && project.link !== '#' ? project.link : null;
+  const hasLink    = project.link && project.link !== '#';
 
+  /** Navega al proyecto al hacer click */
   const handleClick = () => {
-    if (href) {
-      if (isExternal) window.open(href, '_blank', 'noopener,noreferrer');
-      else window.location.href = href;
-    }
+    if (!hasLink) return;
+    if (isExternal) window.open(project.link, '_blank', 'noopener,noreferrer');
+    else window.location.href = project.link;
   };
+
+  // Clases BEM compuestas dinámicamente
+  const cardClass = [
+    'pf-card',
+    featured       ? 'pf-card--featured'  : '',
+    hasLink        ? 'pf-card--clickable' : '',
+  ].filter(Boolean).join(' ');
 
   return (
     <div
-      className={`pf-card${featured ? ' pf-card--featured' : ''}${href ? ' pf-card--clickable' : ''}`}
+      className={cardClass}
       onClick={handleClick}
-      role={href ? 'button' : undefined}
-      tabIndex={href ? 0 : undefined}
-      onKeyDown={href ? (e) => e.key === 'Enter' && handleClick() : undefined}
+      role={hasLink ? 'button' : undefined}
+      tabIndex={hasLink ? 0 : undefined}
+      onKeyDown={hasLink ? (e) => e.key === 'Enter' && handleClick() : undefined}
+      aria-label={hasLink ? `Abrir proyecto: ${project.title}` : undefined}
     >
+      {/* ── Imagen de fondo a sangre completa ── */}
       {project.image && (
         <div className="pf-card__img">
           <Image
@@ -29,20 +59,27 @@ function ProjectCard({ project, featured }) {
             fill
             alt={project.title}
             style={{ objectFit: 'cover' }}
-            sizes={featured ? '(max-width: 900px) 100vw, 900px' : '(max-width: 640px) 100vw, 450px'}
+            sizes={
+              featured
+                ? '(max-width: 900px) 100vw, 900px'
+                : '(max-width: 620px) 100vw, 50vw'
+            }
           />
         </div>
       )}
 
-      {/* Always-on gradient */}
-      <div className="pf-card__gradient" />
+      {/* ── Gradiente oscuro para legibilidad del texto ── */}
+      <div className="pf-card__gradient" aria-hidden="true" />
 
-      {/* Overlay content */}
+      {/* ── Contenido de texto (posicionado al fondo) ── */}
       <div className="pf-card__body">
-        {/* Theme + tags — no duplicates */}
+
+        {/* Chips: tema (siempre) + un tag extra sin repetir el tema */}
         <div className="pf-card__chips">
           {project.theme && (
-            <span className="pf-card__chip pf-card__chip--theme">{project.theme}</span>
+            <span className="pf-card__chip pf-card__chip--theme">
+              {project.theme}
+            </span>
           )}
           {project.tags
             ?.filter((t) => t !== project.theme)
@@ -52,34 +89,49 @@ function ProjectCard({ project, featured }) {
             ))}
         </div>
 
+        {/* Título principal */}
         <h3 className="pf-card__title">{project.title}</h3>
+
+        {/* Subtítulo / descripción corta */}
         <p className="pf-card__subtitle">{project.subtitle}</p>
 
-        {/* Meta row */}
+        {/* Meta: autor · fecha · vistas · shares */}
         <div className="pf-card__meta">
           <span>@{project.author}</span>
-          <span>·</span>
+          <span aria-hidden="true">·</span>
           <span>{project.date}</span>
-          <span style={{ marginLeft: 'auto' }}>{project.views}v · {project.shares}s</span>
+          <span style={{ marginLeft: 'auto' }}>
+            {project.views}v · {project.shares}s
+          </span>
         </div>
+
       </div>
     </div>
   );
 }
 
-// ─── Main Grid ────────────────────────────────────────────────────────────────
-// Layout pattern: [pair], [featured], [pair], [featured], …
+/* ─────────────────────────────────────────────────────────────────────────────
+   PortfolioGrid (componente principal)
+   Organiza los proyectos en bloques alternados: par → featured → par → …
+───────────────────────────────────────────────────────────────────────────── */
 export default function PortfolioGrid({ projects }) {
+  /**
+   * Construye la secuencia de bloques:
+   *   1. Toma 2 proyectos → bloque "pair"
+   *   2. Toma 1 proyecto  → bloque "featured"
+   *   3. Repite hasta agotar el array
+   */
   const blocks = [];
   let i = 0;
+
   while (i < projects.length) {
-    // Pair: 2 medium cards side by side
+    // Par: hasta 2 cards medianas
     const pair = [];
     if (i < projects.length) { pair.push(projects[i]); i++; }
     if (i < projects.length) { pair.push(projects[i]); i++; }
     if (pair.length) blocks.push({ type: 'pair', items: pair });
 
-    // Featured: 1 full-width card
+    // Featured: 1 card a ancho completo
     if (i < projects.length) {
       blocks.push({ type: 'featured', item: projects[i] });
       i++;
@@ -91,13 +143,18 @@ export default function PortfolioGrid({ projects }) {
       {blocks.map((block, idx) => {
         if (block.type === 'featured') {
           return (
-            <ProjectCard key={block.item.id + idx} project={block.item} featured />
+            <ProjectCard
+              key={`featured-${block.item.id}-${idx}`}
+              project={block.item}
+              featured
+            />
           );
         }
+        // Bloque par: grid de 2 columnas
         return (
-          <div key={idx} className="pf-masonry__pair">
+          <div key={`pair-${idx}`} className="pf-masonry__pair">
             {block.items.map((p) => (
-              <ProjectCard key={p.id} project={p} featured={false} />
+              <ProjectCard key={p.id} project={p} />
             ))}
           </div>
         );
