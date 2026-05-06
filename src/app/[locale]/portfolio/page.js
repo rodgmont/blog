@@ -59,9 +59,20 @@ export default async function PortfolioPage({ params }) {
   const msg = MESSAGES[locale] ?? MESSAGES.en;
   const quadrants = getPortfolioData(locale);
 
+  // Interleave projects from all quadrants (round-robin), limit to 6
+  const allProjects = [];
+  const maxLen = Math.max(...quadrants.map((q) => q.projects.length));
+  for (let i = 0; i < maxLen && allProjects.length < 6; i++) {
+    for (const q of quadrants) {
+      if (i < q.projects.length && allProjects.length < 6) {
+        allProjects.push({ ...q.projects[i], theme: q.theme });
+      }
+    }
+  }
+
   return (
     <section style={{ paddingBottom: '100px' }}>
-      <div className="container" style={{ paddingTop: '40px', maxWidth: '900px' }}>
+      <div className="container" style={{ paddingTop: '40px' }}>
         <Link
           href={homePath(locale)}
           className="text-muted no-fade"
@@ -70,11 +81,11 @@ export default async function PortfolioPage({ params }) {
           {msg.backToHome}
         </Link>
         <h1 style={{ marginBottom: '10px', fontSize: '2rem' }}>{msg.title}</h1>
-        <p className="text-muted" style={{ fontSize: '1rem', lineHeight: 1.6, marginBottom: '48px' }}>
+        <p className="text-muted" style={{ fontSize: '1rem', lineHeight: 1.6, marginBottom: '40px' }}>
           {msg.subtitle}
         </p>
 
-        <PortfolioGrid quadrants={quadrants} locale={locale} messages={msg} />
+        <PortfolioGrid projects={allProjects} locale={locale} messages={msg} />
       </div>
     </section>
   );
